@@ -1,0 +1,28 @@
+<html>
+<div style="height:50px;width:100px;background-color:red;"class="drag">呵呵</div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	var _move=false;//移动标记
+	var _x,_y;//鼠标离控件左上角的相对位置
+	$(".drag").css({"position":"absolute","cursor":"move"});//绝对定位，鼠标图形
+    $(".drag").click(function(){
+        }).mousedown(function(e){
+        _move=true;
+        _x=e.pageX-parseInt($(".drag").offset().left);
+        _y=e.pageY-parseInt($(".drag").offset().top);
+        $(".drag").fadeTo(20, 0.5);//点击后开始拖动并透明显示
+    });
+    $(document).mousemove(function(e){
+        if(_move){
+            var x=e.pageX-_x;//移动时根据鼠标位置计算控件左上角的绝对位置
+            var y=e.pageY-_y;
+            $(".drag").css({top:y,left:x});//控件新位置
+        }
+    }).mouseup(function(){
+    _move=false;
+    $(".drag").fadeTo("fast", 1);//松开鼠标后停止移动并恢复成不透明
+  });
+});
+</script>
+</html>
